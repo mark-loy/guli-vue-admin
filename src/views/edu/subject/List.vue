@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import subjectApi from '@/api/subject'
+import subjectApi from '@/api/edu/subject'
 
 export default {
   data() {
@@ -37,16 +37,24 @@ export default {
   created() {
     this.getSubjectClassifyData()
   },
+  watch: {
+    /* 监听filterText的值变化 */
+    filterText(val) {
+      this.$refs.subjectTree.filter(val)
+    }
+  },
   methods: {
     /* 获取课程分类tree数据 */
     getSubjectClassifyData() {
       subjectApi.getSubjectClassify().then(res => {
-        console.log(res);
         this.subjectClassify = res.data.subjectClassify
       })
     },
     /* tree结构过滤方法 */
-    filterNode() {},
+    filterNode(value, data) {
+      if (!value) return true
+      return data.title.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    },
 
   },
 };

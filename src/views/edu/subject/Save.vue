@@ -20,7 +20,7 @@
             :on-error="fileUploadError"
             :disabled="importBtnDisabled"
             :limit="1"
-            :action="BASE_API + '/edu/subject/classify/save'"
+            :action="BASE_API + '/edu/subject/save'"
             name="file"
             accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"> <!-- 限制上传文件的类型为excel -->
             <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
@@ -71,6 +71,8 @@ export default {
       this.fileUploadBtnText = "上传成功"
       // 设置上传按钮为普通状态
       this.loading = false
+      // 跳转到列表页
+      this.$router.push('/subject/list')
     },
     /* excel上传失败后方法 */
     fileUploadError(error) {

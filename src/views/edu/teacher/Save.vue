@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import teacherApi from "@/api/teacher";
+import teacherApi from "@/api/edu/teacher";
 
 import ImageCropper from '@/components/ImageCropper'
 import PanThumb from '@/components/PanThumb'

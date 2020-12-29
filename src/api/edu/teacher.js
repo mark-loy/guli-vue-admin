@@ -38,6 +38,13 @@ export default {
       method: 'delete',
       url: `/edu/teacher/delete/${id}`
     })
+  },
+  /* 查询所有讲师 */
+  getAllTeacher() {
+    return request({
+      method: 'get',
+      url: '/edu/teacher/all'
+    })
   }
 
 }
