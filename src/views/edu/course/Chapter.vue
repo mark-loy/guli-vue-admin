@@ -105,7 +105,28 @@
         </el-form-item>
 
         <el-form-item label="上传视频">
-          <!-- TODO -->
+          <el-upload
+            :on-success="vodUploadSuccess"
+            :before-remove="beforeVodRemove"
+            :on-remove="vodRemove"
+            :on-exceed="handleExceed"
+            :action="BASE_API + 'vod/upload'"
+            :limit="1"
+            name="file"
+          >
+            <el-button size="small" type="primary">上传视频</el-button>
+
+            <el-tooltip placement="right-end">
+              <div slot="content">
+                最大支持1G，<br />
+                支持3GP、ASF、AVI、DAT、DV、FLV、F4V、<br />
+                GIF、M2T、M4V、MJ2、MJPEG、MKV、MOV、MP4、<br />
+                MPE、MPG、MPEG、MTS、OGG、QT、RM、RMVB、<br />
+                SWF、TS、VOB、WMV、WEBM 等视频格式上传
+              </div>
+              <i class="el-icon-question" />
+            </el-tooltip>
+          </el-upload>
         </el-form-item>
       </el-form>
 
@@ -139,7 +160,7 @@ export default {
       chapterVisible: false,
       /* 章节表单 */
       chapter: {
-        title: ''
+        title: "",
       },
       /* 章节表单验证规则 */
       chapterRule: {
@@ -166,6 +187,8 @@ export default {
           { required: true, message: "请选择课时状态", trigger: "change" },
         ],
       },
+      /* 上传视频接口地址 */
+      BASE_API: process.env.BASE_API,
     };
   },
   created() {
@@ -186,7 +209,7 @@ export default {
     next() {
       // 判断课程列表数据源是否为空
       if (this.chapters.length === 0) {
-        return this.$message.error("请先添加课程大纲")
+        return this.$message.error("请先添加课程大纲");
       }
       // 路由跳转
       this.$router.push("/course/publish/" + this.courseId);
@@ -231,7 +254,7 @@ export default {
             // 刷新数据
             this.getChaptersData();
             // 重置表单
-            this.resetChapterForm()
+            this.resetChapterForm();
           });
         } else {
           console.log("error submit!!");
@@ -242,7 +265,7 @@ export default {
     /* 重置章节表单 */
     resetChapterForm() {
       // 清空表单
-      this.chapter = {}
+      this.chapter = {};
       // 关闭章节对话框
       this.chapterVisible = false;
       // 重置表单
@@ -331,7 +354,7 @@ export default {
             // 刷新数据
             this.getChaptersData();
             // 重置表单
-            this.resetVideorForm()
+            this.resetVideorForm();
           });
         } else {
           console.log("error submit!!");
@@ -392,10 +415,47 @@ export default {
     /* 小节对话框，取消按钮 */
     resetVideorForm() {
       // 关闭对话框
-      this.videoVisible = false
+      this.videoVisible = false;
       // 重置小节表单
-      this.$refs.videoRef.resetFields()
-    }
+      this.$refs.videoRef.resetFields();
+    },
+    /* 上传视频成功回调 */
+    vodUploadSuccess(response, file) {
+      // 提示
+      this.$message.success("上传视频成功");
+      // 设置视频id
+      this.video.videoSourceId = response.data.videoId;
+      // 设置视频名称
+      this.video.videoOriginalName = file.name;
+      // 设置视频大小（字节）
+      this.video.size = file.size;
+    },
+    /* 删除视频之前的回调 */
+    beforeVodRemove(file) {
+      return this.$confirm(`是否删除 ${file.name} ?`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      });
+    },
+    /* 删除视频 */
+    vodRemove() {
+      videoApi.deleteVod(this.video.videoSourceId).then((res) => {
+        // 提示
+        this.$message.success("删除视频成功");
+        // 清除视频属性
+        // 设置视频id
+        this.video.videoSourceId = '';
+        // 设置视频名称
+        this.video.videoOriginalName = '';
+        // 设置视频大小（字节）
+        this.video.size = 0;
+      });
+    },
+    /* 限制上传视频个数 */
+    handleExceed() {
+      this.$message.warning("只能上传一个视频");
+    },
   },
 };
 </script>

@@ -30,6 +30,13 @@ export default {
       method: 'delete',
       url: `/edu/video/${id}`
     })
+  },
+  /* 根据id删除上传视频 */
+  deleteVod(id) {
+    return request({
+      method: 'delete',
+      url: `/vod/${id}`
+    })
   }
 
 }
