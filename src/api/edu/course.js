@@ -1,11 +1,13 @@
 import request from '@/utils/request'
 
+const api_name = "api/edu/course"
+
 export default {
   /* 保存课程信息 */
   saveCourseInfo(courseInfo) {
     return request({
       method: 'post',
-      url: '/edu/course/save',
+      url: `${api_name}/save`,
       data: courseInfo
     })
   },
@@ -13,14 +15,14 @@ export default {
   getCourseById(id) {
     return request({
       method: 'get',
-      url: `/edu/course/${id}`
+      url: `${api_name}/${id}`
     })
   },
   /* 修改课程信息 */
   updateCourse(courseInfo) {
     return request({
       method: 'put',
-      url: '/edu/course/update',
+      url: `${api_name}/update`,
       data: courseInfo
     })
   },
@@ -28,21 +30,21 @@ export default {
   getCoursePublish(id) {
     return request({
       method: 'get',
-      url: `/edu/course/publish/${id}`
+      url: `${api_name}/publish/${id}`
     })
   },
   /* 修改课程状态 */
   updateCourseStatus(id) {
     return request({
       method: 'put',
-      url: `/edu/course/update/${id}`
+      url: `${api_name}/update/${id}`
     })
   },
   /* 分页查询 */
   getCoursePageQuery(current, size, courseQuery) {
     return request({
       method: 'post',
-      url: `/edu/course/page/${current}/${size}`,
+      url: `${api_name}/page/${current}/${size}`,
       data: courseQuery
     })
   },
@@ -50,7 +52,7 @@ export default {
   deleteCourse(id) {
     return request({
       method: 'delete',
-      url: `/edu/course/${id}`
+      url: `${api_name}/${id}`
     })
   }
 }

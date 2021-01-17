@@ -1,11 +1,13 @@
 import request from '@/utils/request'
 
+const app_name = "api/edu/video"
+
 export default {
   /* 保存课程小节 */
   saveVideo(video) {
     return request({
       method: 'post',
-      url: '/edu/video/save',
+      url: `${app_name}/save`,
       data: video
     })
   },
@@ -13,14 +15,14 @@ export default {
   getVideoById(id) {
     return request({
       method: 'get',
-      url: `/edu/video/${id}`
+      url: `${app_name}/${id}`
     })
   },
   /* 修改章节 */
   updateVideo(video) {
     return request({
       method: 'put',
-      url: '/edu/video/update',
+      url: `${app_name}/update`,
       data: video
     })
   },
@@ -28,14 +30,14 @@ export default {
   deleteVideo(id) {
     return request({
       method: 'delete',
-      url: `/edu/video/${id}`
+      url: `${app_name}/${id}`
     })
   },
   /* 根据id删除上传视频 */
   deleteVod(id) {
     return request({
       method: 'delete',
-      url: `/vod/${id}`
+      url: `api/vod/${id}`
     })
   }
 

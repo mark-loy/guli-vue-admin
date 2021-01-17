@@ -1,10 +1,12 @@
 import request from '@/utils/request'
 
+const app_name = "api/edu/teacher"
+
 export default {
   /* 多条件组合分页查询讲师 */
   getTeacherList(current, size, pageTeacherQuery) {
     return request({
-      url: `/edu/teacher/page/${current}/${size}`,
+      url: `${app_name}/page/${current}/${size}`,
       method: 'post',
       data: pageTeacherQuery
     })
@@ -12,7 +14,7 @@ export default {
   /* 添加讲师 */
   saveTeacher(teacher) {
     return request({
-      url: '/edu/teacher/add',
+      url: `${app_name}/add`,
       method: 'post',
       data: teacher
     })
@@ -21,14 +23,14 @@ export default {
   getTeacherInfo(id) {
     return request({
       method: 'get',
-      url: `/edu/teacher/${id}`
+      url: `${app_name}/${id}`
     })
   },
   /* 修改讲师信息 */
   updateTeacher(teacher) {
     return request({
       method: 'put',
-      url: '/edu/teacher/update',
+      url: `${app_name}/update`,
       data: teacher
     })
   },
@@ -36,14 +38,14 @@ export default {
   removeTeacher(id) {
     return request({
       method: 'delete',
-      url: `/edu/teacher/delete/${id}`
+      url: `${app_name}/delete/${id}`
     })
   },
   /* 查询所有讲师 */
   getAllTeacher() {
     return request({
       method: 'get',
-      url: '/edu/teacher/all'
+      url: `${app_name}/all`
     })
   }
 

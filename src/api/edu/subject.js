@@ -5,7 +5,7 @@ export default {
   getSubjectClassify() {
     return request({
       method: 'get',
-      url: '/edu/subject/list'
+      url: 'api/edu/subject/list'
     })
   }
 

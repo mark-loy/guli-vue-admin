@@ -5,14 +5,14 @@ export default {
   generateStaData(date) {
     return request({
       method: 'get',
-      url: `sta/daily/generate/${date}`
+      url: `api/sta/daily/generate/${date}`
     })
   },
   /* 获取统计数据 */
   getStaData(dailyQuery) {
     return request({
       method: 'post',
-      url: `sta/daily/get`,
+      url: `api/sta/daily/get`,
       data: dailyQuery
     })
   }
