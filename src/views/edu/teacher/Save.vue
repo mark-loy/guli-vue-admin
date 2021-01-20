@@ -51,7 +51,7 @@
             :width="300"
             :height="300"
             :key="imagecropperKey"
-            :url=" server_url + '/oss/fileupload'"
+            :url=" server_url + 'api/oss/fileupload'"
             field="file"
             @close="imagecropperShow = false"
             @crop-upload-success="cropSuccess"
